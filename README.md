@@ -3,6 +3,7 @@
 
 ```python
 from moviestarplanet import MSPAsyncClient
+from moviestarplanet.entities import *
 import asyncio
 
 async def main():
@@ -14,7 +15,7 @@ async def main():
     msp2_ = msp.MSP2AsyncClient(accessToken=login.AccessToken, profileId=login.ProfileId)
 
     ##search for profiles
-    list_profiles: List[SearchProfileResult] = await msp2.get_profile_search_async(server="server", username="username")
+    list_profiles: List[SearchProfileResult] = await msp2_.get_profile_search_async(server="server", username="username")
     print(list_profiles[0].id) ## first profile found
 
 
