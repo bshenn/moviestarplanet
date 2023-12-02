@@ -12,5 +12,8 @@ print(profile_basic_info.name, profile_basic_info.culture, profile_basic_info.id
 MovieStarPlanet2 Common Services
 ```python
 attributes: Attributes = await msp2_.get_attributes_async(list_profiles[0].id)
+print(attributes.additionalData.WAYD)
+
+## Sends a normal greetings
 sent: bool = msp2._send_autograph_async(list_profiles[0].id)
 ```
