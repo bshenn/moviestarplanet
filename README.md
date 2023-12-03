@@ -16,4 +16,6 @@ print(attributes.additionalData.WAYD)
 
 ## Sends a normal greetings
 sent: bool = msp2._send_autograph_async(list_profiles[0].id)
+## experience info
+exp: Experience2 = await msp2_.get_experience_async(list_profiles[0].id)
 ```
