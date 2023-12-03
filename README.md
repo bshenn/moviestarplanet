@@ -13,3 +13,9 @@ attributes: Attributes = await msp2_.get_attributes_async(list_profiles[0].id)
 sent: bool = msp2._send_autograph_async(list_profiles[0].id)
 exp: Experience2 = await msp2_.get_experience_async(list_profiles[0].id)
 ```
+
+MovieStarPlanet2 Official CheatsServices
+```python
+set: bool = await msp2_.set_mood_async(mood_asset='bunny_hold')
+ did: bool = await msp2_.change_gender_async()
+```
