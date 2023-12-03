@@ -10,7 +10,7 @@ profile_basic_info: List[GetProfilesResult] = await msp2_.get_profiles_async([li
 MovieStarPlanet2 Common Services
 ```python
 attributes: Attributes = await msp2_.get_attributes_async(list_profiles[0].id)
-sent: bool = msp2._send_autograph_async(list_profiles[0].id)
+sent: bool = msp2_.send_autograph_async(list_profiles[0].id)
 exp: Experience2 = await msp2_.get_experience_async(list_profiles[0].id)
 ```
 
