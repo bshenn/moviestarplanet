@@ -20,7 +20,9 @@ await msp2_.set_mood_async(mood_asset='bunny_hold')
 await msp2_.change_gender_async()
 ```
 
- Some messasing systemm
+ Some messasing system & examples
  ```python
-conversations: List[Conversation] = await msp2.get_conversations_async(size=10)
+conversations: List[Conversation] = await msp2_.get_conversations_async(size=10)
+
+first_, second_ = conversations[0].participants[0], conversations[0].participants[1]
 ```
