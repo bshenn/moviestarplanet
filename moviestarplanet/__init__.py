@@ -14,10 +14,12 @@ from moviestarplanet.tls.sr import sd
 from moviestarplanet.tls.px import set
 from moviestarplanet.tls.tcy import t
 from moviestarplanet.exceptions import *
+from moviestarplanet.ej import Conversation
 from pyamf import remoting, AMF3
 import base64 as b2
 import json as js
 from typing import List
+from datetime import datetime
 
 class MSPAsyncClient:
     '''
@@ -289,6 +291,46 @@ class MSPAsyncClient:
                     return True
             return False
 
+
+        async def get_conversations_async(self, size: int = 50):
+            '''Loads all your conversations.\n
+            Args:
+                size (int, optional): The number of conversations to retrieve per request. Defaults to 50.
+
+            Returns:
+                List[Conversation]: A list of Conversation objects representing the participant's conversations.
+            
+            Example Usage:
+            ```python
+            conversations: List[Conversation] = await msp2.get_conversations_async(size=10)
+            for conv in conversations:
+                ## your oode here, see Conversation object.
+            
+            ## the first (latest i guess) conversation:
+            print(conversations.id) ## per example
+            ```
+            '''
+            async with self.session.get(url=f'https://eu.mspapis.com/gamemessaging/v1/participants/{self.pid}/conversations?&page=1&pageSize={str(size)}', headers={'Authorization': f'Bearer {self._at}'}) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    
+                    if not data:  # Check if the response is an empty list
+                        return []
+
+                    return [Conversation(
+                conv['conversationId'],
+                conv['conversationName'],
+                conv['conversationStatus'],
+                conv['conversationType'],
+                datetime.fromisoformat(conv['created']),
+                datetime.fromisoformat(conv['joinDate']),
+                datetime.fromisoformat(conv['latestActivity']),
+                js.loads(conv['latestMessage']),
+                datetime.fromisoformat(conv['leaveDate']),
+                conv['muted'],
+                conv['numberOfUnreadMessages'],
+                conv['participants']
+            ) for conv in data]
 
 
 
