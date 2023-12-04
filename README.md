@@ -19,3 +19,8 @@ MovieStarPlanet2 Official CheatsServices
 await msp2_.set_mood_async(mood_asset='bunny_hold')
 await msp2_.change_gender_async()
 ```
+
+ Some messasing systemm
+ ```python
+conversations: List[Conversation] = await msp2.get_conversations_async(size=10)
+```
