@@ -5,9 +5,19 @@ Welcome to the MovieStarPlanet Python Library, a comprehensive asynchronous tool
 ```python
 from moviestarplanet import MSPAsyncClient
 msp1_ = MSPAsyncClient(proxy=..., timeout=...)
+```
 
-login = await msp.login_async(username, password, server)
-# Initialize the MovieStarPlanet2 class
+# Login to MSP1
+Login to MSP1 and checks if the jsonwebtoken is not null
+```python
+login = await msp1_.login_async(username, password, server)
+if login.AccessToken != None:
+    ...
+```
+
+# Intialize the MovieStarPlanet2 Class
+You need to initialize the MovieStarPlanet2 class with the login JWT and profileId.
+```python
 msp2_ = msp.MSP2AsyncClient(accessToken=login.AccessToken, profileId=login.ProfileId)
 ```
 
