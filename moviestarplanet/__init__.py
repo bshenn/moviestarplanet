@@ -282,14 +282,17 @@ class MSPAsyncClient:
     
         async def change_gender_async(self) -> bool:
             '''Switch from boy to girl, girl to boy.'''
-            attributes: dict = await self.get_attributes_json_async(profileId=self.pid)
-            gender_to_set = "Boy" if attributes["additionalData"]["Gender"] == "Girl" else "Girl"
-            attributes["additionalData"]["Gender"] = gender_to_set
+            try:
+                attributes: dict = await self.get_attributes_json_async(profileId=self.pid)
+                gender_to_set = "Boy" if attributes["additionalData"]["Gender"] == "Girl" else "Girl"
+                attributes["additionalData"]["Gender"] = gender_to_set
 
-            async with self.session.put(url=f'https://eu.mspapis.com/profileattributes/v1/profiles/{self.pid}/games/j68d/attributes', json=attributes, headers={'Authorization': f'Bearer {self._at}'}) as response:
-                if response.status == 200:
-                    return True
-            return False
+                async with self.session.put(url=f'https://eu.mspapis.com/profileattributes/v1/profiles/{self.pid}/games/j68d/attributes', json=attributes, headers={'Authorization': f'Bearer {self._at}'}) as response:
+                    if response.status == 200:
+                        return True
+                return False
+            except:
+                return False
 
 
         async def get_conversations_async(self, size: int = 50):
@@ -307,7 +310,7 @@ class MSPAsyncClient:
                 ## your oode here, see Conversation object.
             
             ## the first (latest i guess) conversation:
-            print(conversations.id) ## per example
+            print(conversations[0].id) ## per example
             ```
             '''
             async with self.session.get(url=f'https://eu.mspapis.com/gamemessaging/v1/participants/{self.pid}/conversations?&page=1&pageSize={str(size)}', headers={'Authorization': f'Bearer {self._at}'}) as response:
@@ -331,8 +334,6 @@ class MSPAsyncClient:
                 conv['numberOfUnreadMessages'],
                 conv['participants']
             ) for conv in data]
-
-
 
 
         async def get_attributes_async(self, profileId: str = None) -> Attributes:
