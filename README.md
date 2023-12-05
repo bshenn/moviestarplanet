@@ -4,7 +4,11 @@ Welcome to the MovieStarPlanet Python Library, a comprehensive asynchronous tool
 # Initialize the class
 ```python
 from moviestarplanet import MSPAsyncClient
-msp2_ = MSPAsyncClient(proxy=..., timeout=...)
+msp1_ = MSPAsyncClient(proxy=..., timeout=...)
+
+login = await msp.login_async(username, password, server)
+# Initialize the MovieStarPlanet2 class
+msp2_ = msp.MSP2AsyncClient(accessToken=login.AccessToken, profileId=login.ProfileId)
 ```
 
 # MovieStarPlanet2 Profile Gathering
