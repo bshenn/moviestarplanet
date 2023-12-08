@@ -27,7 +27,7 @@ You will need to access first LoginResult dataclass.
 from moviestarplanet.entities import *
 ```
 ```python
-login: LoginResult = await msp.login_async('username', 'password', 'fr')
+login: LoginResult = await msp1_client.login_async('username', 'password', 'fr')
 ```
 This example demonstrates how to log in to MovieStarPlanet 1 using the initialized client.
 
