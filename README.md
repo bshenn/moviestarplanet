@@ -14,7 +14,6 @@ Initializing the Library for MovieStarPlanet 1
 import asyncio
 from moviestarplanet import MSPAsyncClient
 
-
 async def main():
     msp1_client = MSPAsyncClient(proxy='your_proxy', timeout=10)
 
@@ -30,3 +29,10 @@ from moviestarplanet.entities import *
 ```python
 login: LoginResult = await msp.login_async('username', 'password', 'fr')
 ```
+This example demonstrates how to log in to MovieStarPlanet 1 using the initialized client.
+
+# Initializing the Library for MovieStarPlanet 2
+```python
+msp2_client = msp.MSP2AsyncClient(accessToken=login.AccessToken, profileId=login.ProfileId)
+```
+To interact with MovieStarPlanet 2, use the obtained '**AccessToken**' and '**ProfileId**' from login to initialize the library.
